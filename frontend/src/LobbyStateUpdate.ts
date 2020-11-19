@@ -5,9 +5,9 @@ import {GameStateUpdate} from "./GameStateUpdate";
 
 export interface LobbyStateUpdate {
     players : Player[];
-    imageURL? : URL;
+    imageURL? : string;
     imageSplit : string; // "Horizontal" or "Vertical"
-    gameTimeMinutes : number;
+    gameTime: number; // in seconds
     allowImageUploads : boolean;
     gameStateUpdate? : GameStateUpdate // If not present; game hasn't started
 }
