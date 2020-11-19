@@ -100,7 +100,7 @@ class Lobby {
 	public function setGameOptions($option, $value) {
 		if ($this->checkDoesLobbyExist()) {
 			if ($this->checkPlayerInLobby() {
-				if ($this->checkPlayerIsGameMaster) {
+				if ($this->checkPlayerIsGameMaster()) {
 					if (isset($this->lobby["gameOptions"][$option])) {
 						$this->lobby["gameOptions"][$option] = $value;			
 					} else {

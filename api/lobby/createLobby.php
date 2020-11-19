@@ -2,7 +2,8 @@
 require_once 'Lobby.php';
 
 try {
-	$lobby = new Lobby(uniqid());
+	$lobbyUUID = uniqid();
+	$lobby = new Lobby($lobbyUUID);
 
 	$lobby->createLobby();
 	$lobby->joinLobby();
@@ -11,7 +12,7 @@ try {
 		$lobby->setName($_GET["name"]);
 		
 	}
-	echo json_encode(true);
+	echo json_encode(array("id"=>$lobbyUUID));
 
 } catch (Exception $e) {
 	echo json_encode(array("error"=>$e->getMessage()));
