@@ -1,8 +1,11 @@
-﻿import axios from 'axios';
+﻿import { AxiosStatic } from "axios";
+
 export class ApiClient {
-    private _baseURL: string;
+    private readonly _baseURL: string;
+    private readonly axios: AxiosStatic;
     
-    constructor(baseURL : string) {
+    constructor(axios : AxiosStatic, baseURL : string) {
+        this.axios = axios;
         this._baseURL = baseURL;
     }
     
@@ -18,7 +21,7 @@ export class ApiClient {
     }
     
     public createLobby() {
-        axios.get(this.url('/api/lobby/createLobby.php'))
+        this.axios.get(this.url('/api/lobby/createLobby.php'))
             .then(r => {
                 console.log(r);
             })

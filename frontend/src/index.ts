@@ -1,5 +1,7 @@
 ﻿import {Lobby} from "./Lobby";
 import {UiManager} from "./UiManager";
+import {ApiClient} from "./ApiClient";
+import axios from 'axios';
 
 let queryDict : any = {}
 // @ts-ignore - this comes from stack overflow, I don't care how it works
@@ -7,7 +9,9 @@ location.search.substr(1).split("&").forEach(function(item) {queryDict[item.spli
 
 let lobbyId : string = queryDict["l"];
 
-const lobby = new Lobby();
+const apiClient = new ApiClient(axios, 'http://vpsb.alexcopland.co.uk');
+apiClient.createLobby();
+const lobby = new Lobby(apiClient);
 const uiManager = new UiManager(lobby);
 
 lobby.update({

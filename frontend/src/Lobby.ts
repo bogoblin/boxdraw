@@ -2,13 +2,16 @@
 import {LobbyStateUpdate} from "./LobbyStateUpdate";
 import {Section} from "./Section";
 import {Game} from "./Game";
+import {ApiClient} from "./ApiClient";
 
 export class Lobby {
     private lastUpdate : LobbyStateUpdate;
     private gameMasterIsYou : boolean;
     private _game: Game;
-    
-    constructor() {
+    private _apiClient: ApiClient;
+
+    constructor(apiClient: ApiClient) {
+        this._apiClient = apiClient;
         this.gameMasterIsYou = false;
         this._game = new Game();
     }
