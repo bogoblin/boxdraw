@@ -12,7 +12,7 @@ export class Game {
     get sections() { return this.lastUpdate.sections; }
     
     get timeRemaining() {
-        return this.lastUpdate.timeEnd - this.lastUpdate.timeCreation;
+        return this.lastUpdate.timeEnd - new Date().getUTCSeconds();
     }
     
     get imageURL() { return this.lastUpdate.gameOptions.imageURL; }
