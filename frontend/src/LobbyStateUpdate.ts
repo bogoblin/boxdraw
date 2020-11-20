@@ -1,13 +1,13 @@
 ﻿import {Player} from "./Player";
 import {GameStateUpdate} from "./GameStateUpdate";
+import {GameOptions} from "./GameOptions";
+import {LobbyOptions} from "./LobbyOptions";
 
 // from /lobby/getState.php
 
 export interface LobbyStateUpdate {
     players : Player[];
-    imageURL? : string;
-    imageSplit : string; // "Horizontal" or "Vertical"
-    gameTime: number; // in seconds
-    allowImageUploads : boolean;
+    gameOptions: GameOptions;
+    lobbyOptions: LobbyOptions;
     gameStateUpdate? : GameStateUpdate // If not present; game hasn't started
 }

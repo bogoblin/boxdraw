@@ -1,39 +1,67 @@
 ﻿import {Player} from "./Player";
 import {LobbyStateUpdate} from "./LobbyStateUpdate";
+import {Section} from "./Section";
+import {Game} from "./Game";
 
 export class Lobby {
     private lastUpdate : LobbyStateUpdate;
-    private playersList? : HTMLElement;
     private gameMasterIsYou : boolean;
-
+    private _game: Game;
+    
     constructor() {
-        this.playersList = document.getElementById('playersList');
         this.gameMasterIsYou = false;
+        this._game = new Game();
     }
     
     public update(info : LobbyStateUpdate) : void {
-        this.lastUpdate = info;
-        
-        // Update the UI - this may be replaced with some react stuff if I do that
-        // Update players list
-        this.playersList.innerHTML = '';
-        this.players.forEach(player => {
-            const el = document.createElement('li');
-            el.innerText = player.name;
-            if (player.isGameMaster) {
-                el.classList.add('gameMaster');
-            }
+        info.players.forEach(player => {
             if (player.isYou) {
-                el.classList.add('you');
+                this.gameMasterIsYou = player.isGameMaster;
             }
-            if (player.isYou && player.isGameMaster) {
-                this.gameMasterIsYou = true;
-            }
-            this.playersList.appendChild(el);
         });
+        this.lastUpdate = info;
+        this._game.update(info.gameStateUpdate);
     }
-    
+
     get players() : Player[] {
         return this.lastUpdate.players;
+    }
+    
+    get gameTime() : number {
+        return this.lastUpdate.gameOptions.gameTime;
+    }
+    
+    get allowImageUploads() : boolean {
+        return this.lastUpdate.gameOptions.allowImageUploads;
+    }
+    
+    get imageURL() : string | undefined {
+        return this.lastUpdate.gameOptions.imageURL;
+    }
+    
+    get game() : Game {
+        return this._game;
+    }
+
+    canStartLobby() : boolean {
+        const numberOfPlayers = this.lastUpdate.players.length;
+        return this.gameMasterIsYou && numberOfPlayers >= 2;
+    }
+    
+    getPlayer(id : string) : Player {
+        for (let player of this.players) {
+            if (player.id == id) {
+                return player;
+            }
+        }
+    }
+
+    start() : [boolean, string] {
+        // Make the API request that starts the lobby
+        return [true, ''];
+    }
+    
+    uploadSection() : void {
+        
     }
 }

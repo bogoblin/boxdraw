@@ -5,10 +5,32 @@
     <title>boxdraw.io</title>
 </head>
 <body>
-<h2>Lobby settings</h2>
-<div> Game duration: <span id='gameTime'></span> </div>
-<ul id='playersList'></ul>
-<a href='startLobby()'>Start lobby</a>
+<div id="home">
+    <a id="createLobby">Create Lobby</a>
+</div>
+<div id='lobby'>
+    <h2>Lobby</h2>
+    <div> Game duration: <span id='gameTime'></span> </div>
+    <div> Allow image uploads: <span id='allowUploads'>yes</span> </div>
+    <img id="lobbyImage">
+    <ul id='playersList'></ul>
+    <a id='startLobby'>Start Lobby</a>
+</div>
+<div id="game">
+    <h2>Game</h2>
+    <ul id='sectionsList'></ul>
+    <img id="gameImage"><br>
+    <input type="file" accept="image/*" id="imageUpload">
+    <a id='uploadImage'>Upload</a>
+</div>
+<div id="result">
+    <h2>Result</h2>
+    <img id="stitchedImage">
+    <a id="returnToLobby">Return to lobby</a>
+</div>
+
+
+
 <script src="bundle.js"></script>
 </body>
 </html>

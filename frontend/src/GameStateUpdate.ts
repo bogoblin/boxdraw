@@ -1,9 +1,10 @@
 ﻿import {Section} from "./Section";
+import {GameOptions} from "./GameOptions";
 
 export interface GameStateUpdate {
     id : string;
-    timeRemaining : number; // In seconds
     sections : Section[];
-    imageURL : string; // Notice this is required; whereas it is not in the lobby
-    imageSplit : string; // "Horizontal" or "Vertical"
+    gameOptions: GameOptions;
+    timeCreation: number; // UTC seconds
+    timeEnd: number; // UTC seconds
 }

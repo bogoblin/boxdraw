@@ -1,4 +1,5 @@
 ﻿import {Lobby} from "./Lobby";
+import {UiManager} from "./UiManager";
 
 let queryDict : any = {}
 // @ts-ignore - this comes from stack overflow, I don't care how it works
@@ -7,6 +8,7 @@ location.search.substr(1).split("&").forEach(function(item) {queryDict[item.spli
 let lobbyId : string = queryDict["l"];
 
 const lobby = new Lobby();
+const uiManager = new UiManager(lobby);
 
 lobby.update({
     players: [
@@ -23,15 +25,26 @@ lobby.update({
             isYou: false
         }
     ],
-    gameTime: 3000,
-    allowImageUploads: true,
-    imageSplit: 'Horizontal',
-    imageURL: 'https://www.image.com/myImage.png',
+    gameOptions : {
+        gameTime: 3000,
+        allowImageUploads: true,
+        imageSplit: 'horizontal',
+        imageURL: 'https://www.image.com/myImage.png',
+    },
+    lobbyOptions: {
+        maxPlayers: 16,
+        lobbyLocked: false
+    },
     gameStateUpdate: {
         id: 'asdf123',
-        imageSplit: 'Horizontal',
-        imageURL: 'https://www.image.com/myImage.png',
-        timeRemaining: 69,
+        gameOptions: {
+            gameTime: 3000,
+            allowImageUploads: true,
+            imageSplit: 'horizontal',
+            imageURL: 'https://www.image.com/myImage.png',
+        },
+        timeCreation: new Date().getUTCSeconds(),
+        timeEnd: new Date().getUTCSeconds() + 1000,
         sections: [
             {
                 x: 0,
@@ -52,3 +65,4 @@ lobby.update({
         ]
     }
 });
+uiManager.update();
